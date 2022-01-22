@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:race_app/app/controllers/racers_controller.dart';
 import 'package:race_app/app/dtos/racer_dto.dart';
 
 class CallAlertDialog {
@@ -36,7 +37,8 @@ class CallAlertDialog {
     Widget continueButton = TextButton(
       child: Text("Yes"),
       onPressed: () {
-        //Delete Action
+        RacersController.deleteRacer(racer);
+        Navigator.pop(context);
       },
     );
 

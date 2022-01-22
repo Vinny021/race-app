@@ -16,4 +16,8 @@ class RacersController {
         ? racers.add(racer)
         : AlertDialogStreamController.alertDialogController.add(null);
   }
+
+  static deleteRacer(Racer racerToBeDeleted) {
+    racers.removeWhere((racer) => racer.number == racerToBeDeleted.number);
+  }
 }
