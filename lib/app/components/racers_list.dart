@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:race_app/app/controllers/racers_controller.dart';
+import 'package:race_app/app/streams/delete_racer_stream_controller.dart';
 
 class RacersList extends StatefulWidget {
   @override
@@ -20,7 +21,10 @@ class _RacersListState extends State<RacersList> {
                   contentPadding: EdgeInsets.only(left: 10, right: 10),
                   title: Text(racer.name),
                   subtitle: Text(racer.number.toString()),
-                  onTap: () {},
+                  onTap: () {
+                    DeleteRacerStreamController.deleteRacerController
+                        .add(racer);
+                  },
                 ),
               )
             ])
