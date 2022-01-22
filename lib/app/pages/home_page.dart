@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:race_app/app/components/racer_input.dart';
 import 'package:race_app/app/components/racers_list.dart';
+import 'package:race_app/app/components/start_race_button.dart';
 import 'package:race_app/app/dialogs/alert_dialog.dart';
 import 'package:race_app/app/streams/alert_dialog_stram_controller.dart';
 import 'package:race_app/app/streams/delete_racer_stream_controller.dart';
@@ -67,13 +68,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 40),
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/race');
-                  },
-                  child: Text('Start Race')),
-            )
+                padding: const EdgeInsets.only(bottom: 38),
+                child: StartRaceButton())
           ],
         ),
       ),
