@@ -65,6 +65,11 @@ class _HomePageState extends State<HomePage> {
                   children: [RacersList()],
                 ),
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 40),
+              child:
+                  ElevatedButton(onPressed: () {}, child: Text('Start Race')),
             )
           ],
         ),

@@ -83,8 +83,6 @@ class _RacerInputState extends State<RacerInput> {
   }
 
   checkIfButtonCanBeEnabled() {
-    print(racerNameController.text);
-    print(racerNumberController.text);
     (racerNameController.text != '' && racerNumberController.text != '')
         ? setState(() {
             isButtonDisabled = false;
