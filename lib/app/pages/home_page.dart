@@ -40,9 +40,15 @@ class _HomePageState extends State<HomePage> {
           children: [
             RacerInput(),
             Divider(),
-            SingleChildScrollView(
-              child: RacersList(),
-            ),
+            Expanded(
+              child: Container(
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  children: [RacersList()],
+                ),
+              ),
+            )
           ],
         ),
       ),
