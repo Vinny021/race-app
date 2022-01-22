@@ -68,8 +68,11 @@ class _HomePageState extends State<HomePage> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 40),
-              child:
-                  ElevatedButton(onPressed: () {}, child: Text('Start Race')),
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/race');
+                  },
+                  child: Text('Start Race')),
             )
           ],
         ),
