@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:race_app/app/dtos/racer_dto.dart';
+import 'package:race_app/app/streams/alert_dialog_stram_controller.dart';
 
 class RacersController {
   static List<Racer> racers = [];
@@ -12,7 +12,8 @@ class RacersController {
         repeatedNumber = true;
       }
     });
-    (!repeatedNumber) ? racers.add(racer) : AlertDialog();
-    
+    (!repeatedNumber)
+        ? racers.add(racer)
+        : AlertDialogStreamController.alertDialogController.add(null);
   }
 }
