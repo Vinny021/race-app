@@ -6,6 +6,7 @@ import 'package:race_app/app/components/racers_list.dart';
 import 'package:race_app/app/dialogs/alert_dialog.dart';
 import 'package:race_app/app/streams/alert_dialog_stram_controller.dart';
 import 'package:race_app/app/streams/delete_racer_stream_controller.dart';
+import 'package:race_app/app/streams/refresh_page_stream.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   StreamSubscription alertDialogSubscription;
   StreamSubscription deleteRacerSubscription;
+  StreamSubscription refreshPageSubscription;
 
   @override
   void initState() {
@@ -29,11 +31,18 @@ class _HomePageState extends State<HomePage> {
         DeleteRacerStreamController.deleteRacerStream.listen((racer) {
       CallAlertDialog.verifyDeleteAction(context, racer);
     });
+
+    refreshPageSubscription =
+        RefreshPageStreamController.refreshPageStream.listen((_) {
+      setState(() {});
+    });
   }
 
   @override
   void dispose() {
     alertDialogSubscription?.cancel();
+    deleteRacerSubscription?.cancel();
+    refreshPageSubscription?.cancel();
     super.dispose();
   }
 
