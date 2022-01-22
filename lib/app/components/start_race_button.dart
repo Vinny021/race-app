@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:race_app/app/controllers/racers_controller.dart';
+import 'package:race_app/app/dtos/race_dto.dart';
 
 class StartRaceButton extends StatefulWidget {
   @override
@@ -50,7 +52,7 @@ class _StartRaceButtonState extends State<StartRaceButton> {
             onPressed: isButtonDisabled
                 ? null
                 : () {
-                    Navigator.pushNamed(context, '/race');
+                    setupAndStartRace(numberOfLaps.text);
                   },
             child: Text('Start Race'),
             style: ElevatedButton.styleFrom(
@@ -70,5 +72,14 @@ class _StartRaceButtonState extends State<StartRaceButton> {
         : setState(() {
             isButtonDisabled = false;
           });
+  }
+
+  void setupAndStartRace(String laps) {
+    Race race = Race(
+        startedTime: DateTime.now(),
+        laps: int.parse(laps),
+        racers: RacersController.racers);
+
+    Navigator.of(context).pushNamed('/race', arguments: {'race': race});
   }
 }
