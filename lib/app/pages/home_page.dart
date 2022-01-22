@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:race_app/app/components/racer_input.dart';
+import 'package:race_app/app/dialogs/alert_dialog.dart';
 import 'package:race_app/app/streams/alert_dialog_stram_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +18,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     alertDialogSubscription =
         AlertDialogStreamController.alertDialogStream.listen((_) {
+      CallAlertDialog.showAlertDialog(context);
     });
   }
 
