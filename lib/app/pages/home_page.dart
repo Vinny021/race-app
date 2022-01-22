@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:race_app/app/components/racer_input.dart';
+import 'package:race_app/app/components/racers_list.dart';
 import 'package:race_app/app/dialogs/alert_dialog.dart';
 import 'package:race_app/app/streams/alert_dialog_stram_controller.dart';
 
@@ -36,7 +37,13 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: Column(
-          children: [RacerInput(), Divider()],
+          children: [
+            RacerInput(),
+            Divider(),
+            SingleChildScrollView(
+              child: RacersList(),
+            ),
+          ],
         ),
       ),
     );
