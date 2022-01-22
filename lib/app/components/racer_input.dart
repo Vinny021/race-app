@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:race_app/app/controllers/racers_controller.dart';
+import 'package:race_app/app/dtos/racer_dto.dart';
 
 class RacerInput extends StatefulWidget {
   @override
@@ -67,7 +69,7 @@ class _RacerInputState extends State<RacerInput> {
             onPressed: isButtonDisabled
                 ? null
                 : () {
-                    print('Adding Racer...');
+                    insertRacer();
                   },
             child: Text('Insert Racer'),
             style: ElevatedButton.styleFrom(
@@ -90,5 +92,13 @@ class _RacerInputState extends State<RacerInput> {
         : setState(() {
             isButtonDisabled = true;
           });
+  }
+
+  insertRacer() {
+    final String name = racerNameController.text;
+    final int number = int.parse(racerNumberController.text);
+
+    final racer = Racer(name: name, number: number);
+    RacersController.insertRacer(racer);
   }
 }
