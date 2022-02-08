@@ -18,8 +18,17 @@ class _RacePageState extends State<RacePage> {
       appBar: AppBar(
         title: Text('Race'),
       ),
-      body: Container(
-        child: Text(race['race']),
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+                'Race Started at ${race['race'].startedTime.hour}:${race['race'].startedTime.minute}'
+            )
+          ],
+        ),
       ),
     );
   }

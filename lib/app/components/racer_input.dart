@@ -9,6 +9,7 @@ class RacerInput extends StatefulWidget {
 }
 
 class _RacerInputState extends State<RacerInput> {
+  RacersController racersController = RacersController();
   final TextEditingController racerNameController = TextEditingController();
   final TextEditingController racerNumberController = TextEditingController();
   bool isButtonDisabled = true;
@@ -97,6 +98,6 @@ class _RacerInputState extends State<RacerInput> {
     final int number = int.parse(racerNumberController.text);
 
     final racer = Racer(name: name, number: number);
-    RacersController.insertRacer(racer);
+    racersController.insertRacer(racer);
   }
 }
