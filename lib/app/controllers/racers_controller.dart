@@ -1,11 +1,11 @@
-import 'package:race_app/app/controllers/shared_preferences_controller.dart';
+import 'package:race_app/app/controllers/storage_controller.dart';
 import 'package:race_app/app/dtos/racer_dto.dart';
 import 'package:race_app/app/streams/alert_dialog_stram_controller.dart';
 import 'package:race_app/app/streams/refresh_page_stream.dart';
 
 class RacersController {
-  SharedPreferencesController sharedPreferencesController =
-      SharedPreferencesController();
+  StorageController sharedPreferencesController =
+      StorageController();
   static List<Racer> racers = [];
 
   loadRacers() async {
@@ -32,8 +32,8 @@ class RacersController {
   }
 
   static deleteRacer(Racer racerToBeDeleted) {
-    SharedPreferencesController sharedPreferencesController =
-        SharedPreferencesController();
+    StorageController sharedPreferencesController =
+        StorageController();
     racers.removeWhere((racer) => racer.number == racerToBeDeleted.number);
     sharedPreferencesController.saveRacers(racers);
     RefreshPageStreamController.refreshPageController.add(null);

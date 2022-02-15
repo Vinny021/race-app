@@ -5,7 +5,7 @@ import 'package:race_app/app/components/racer_input.dart';
 import 'package:race_app/app/components/racers_list.dart';
 import 'package:race_app/app/components/start_race_button.dart';
 import 'package:race_app/app/controllers/racers_controller.dart';
-import 'package:race_app/app/controllers/shared_preferences_controller.dart';
+import 'package:race_app/app/controllers/storage_controller.dart';
 import 'package:race_app/app/dialogs/alert_dialog.dart';
 import 'package:race_app/app/streams/alert_dialog_stram_controller.dart';
 import 'package:race_app/app/streams/delete_racer_stream_controller.dart';
