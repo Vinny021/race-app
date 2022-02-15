@@ -3,7 +3,7 @@ import 'package:race_app/app/controllers/racers_controller.dart';
 import 'package:race_app/app/dtos/racer_dto.dart';
 
 class CallAlertDialog {
-  static showAlertDialog(BuildContext context) {
+  static showAlertDialog(BuildContext context, String error, String message) {
     Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
@@ -12,8 +12,8 @@ class CallAlertDialog {
     );
 
     AlertDialog alert = AlertDialog(
-      title: Text("Number Already in Use"),
-      content: Text("Please select another number."),
+      title: Text(error),
+      content: Text(message),
       actions: [
         okButton,
       ],
