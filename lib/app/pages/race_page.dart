@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:race_app/app/dtos/race_dto.dart';
+import 'package:race_app/app/components/racers_register.dart';
 
 class RacePage extends StatefulWidget {
   // Race race;
@@ -25,8 +25,12 @@ class _RacePageState extends State<RacePage> {
               height: 10,
             ),
             Text(
-                'Race Started at ${race['race'].startedTime.hour}:${race['race'].startedTime.minute}'
-            )
+                'Race Started at ${race['race'].startedTime.hour}:${race['race'].startedTime.minute}'),
+            SizedBox(
+              height: 30,
+            ),
+            RacersRegister(),
+            Divider()
           ],
         ),
       ),
