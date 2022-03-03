@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:race_app/app/controllers/race_controller.dart';
 import 'package:race_app/app/controllers/racers_controller.dart';
+import 'package:race_app/app/dtos/racer_dto.dart';
 
 class RacersRegister extends StatefulWidget {
   @override
@@ -9,6 +11,7 @@ class RacersRegister extends StatefulWidget {
 
 class _RacersRegisterState extends State<RacersRegister> {
   RacersController racersController = RacersController();
+  RaceController raceController = RaceController();
   final TextEditingController racerNumberController = TextEditingController();
   bool isButtonDisabled = true;
 
@@ -70,8 +73,9 @@ class _RacersRegisterState extends State<RacersRegister> {
   registerRacer() {
     final int number = int.parse(racerNumberController.text);
 
-    racersController.racerExist(number);
+    Racer racer = racersController.racerExist(number);
 
+    if (racer is Racer) raceController.addRaceLog(racer);
     //Register racer on race controller
   }
 }
