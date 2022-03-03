@@ -5,11 +5,11 @@ import 'package:race_app/app/streams/alert_dialog_stram_controller.dart';
 import 'package:race_app/app/streams/refresh_page_stream.dart';
 
 class RacersController {
-  StorageController sharedPreferencesController = StorageController();
+  StorageController storageController = StorageController();
   static List<Racer> racers = [];
 
   loadRacers() async {
-    racers = await sharedPreferencesController.loadRacers();
+    racers = await storageController.loadRacers();
     RefreshPageStreamController.refreshPageController.add(null);
   }
 
@@ -23,7 +23,7 @@ class RacersController {
     });
     if (!repeatedNumber) {
       racers.add(racer);
-      sharedPreferencesController.saveRacers(racers);
+      storageController.saveRacers(racers);
     } else
       AlertDialogStreamController.alertDialogController.add(AlertDialogProps(
           error: "Number Already in Use",
