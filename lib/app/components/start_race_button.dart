@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:race_app/app/controllers/race_controller.dart';
 import 'package:race_app/app/controllers/racers_controller.dart';
 import 'package:race_app/app/dtos/race_dto.dart';
 
@@ -79,6 +80,11 @@ class _StartRaceButtonState extends State<StartRaceButton> {
         startedTime: DateTime.now(),
         laps: int.parse(laps),
         racers: RacersController.racers);
+
+    if(int.parse(laps) != RaceController.race.laps){
+      RaceController.race.positions = [];
+      RaceController.race.raceLogs = {};
+    } 
 
     Navigator.of(context).pushNamed('/race', arguments: {'race': race});
   }

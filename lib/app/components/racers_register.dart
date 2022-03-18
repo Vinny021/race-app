@@ -11,7 +11,6 @@ class RacersRegister extends StatefulWidget {
 
 class _RacersRegisterState extends State<RacersRegister> {
   RacersController racersController = RacersController();
-  RaceController raceController = RaceController();
   final TextEditingController racerNumberController = TextEditingController();
   bool isButtonDisabled = true;
 
@@ -75,7 +74,7 @@ class _RacersRegisterState extends State<RacersRegister> {
 
     Racer racer = racersController.racerExist(number);
 
-    if (racer is Racer) raceController.addRaceLog(racer);
+    if (racer is Racer) RaceController.addRaceLog(racer);
     //Register racer on race controller
   }
 }
