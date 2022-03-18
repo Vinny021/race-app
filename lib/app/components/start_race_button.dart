@@ -23,43 +23,59 @@ class _StartRaceButtonState extends State<StartRaceButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        Text('N° of Laps'),
-        SizedBox(
-          width: 10,
-        ),
-        Flexible(
-          child: Container(
-            height: 38,
-            width: 50,
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-              ),
-              controller: numberOfLaps,
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
-              ],
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('N° of Laps'),
+            SizedBox(
+              width: 10,
             ),
-          ),
+            Flexible(
+              child: Container(
+                height: 38,
+                width: 50,
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
+                  controller: numberOfLaps,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
-        SizedBox(
-          width: 10,
-        ),
-        ElevatedButton(
-            onPressed: isButtonDisabled
-                ? null
-                : () {
-                    setupAndStartRace(numberOfLaps.text);
-                  },
-            child: Text('Start Race'),
-            style: ElevatedButton.styleFrom(
-                primary: isButtonDisabled
-                    ? Colors.grey
-                    : Theme.of(context).colorScheme.primary)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: isButtonDisabled
+                    ? null
+                    : () {
+                        setupAndStartRace(numberOfLaps.text);
+                      },
+                child: Text('Start New Race'),
+                style: ElevatedButton.styleFrom(
+                    primary: isButtonDisabled
+                        ? Colors.grey
+                        : Theme.of(context).colorScheme.primary)),
+            SizedBox(
+              width: 10,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  continueRace();
+                },
+                child: Text('Continue Race'),
+                style: ElevatedButton.styleFrom(
+                    primary: Theme.of(context).colorScheme.primary))
+          ],
+        )
       ],
     );
   }
@@ -81,11 +97,13 @@ class _StartRaceButtonState extends State<StartRaceButton> {
         laps: int.parse(laps),
         racers: RacersController.racers);
 
-    if(int.parse(laps) != RaceController.race.laps){
-      RaceController.race.positions = [];
-      RaceController.race.raceLogs = {};
-    } 
+    RaceController.race.positions = [];
+    RaceController.race.raceLogs = {};
 
     Navigator.of(context).pushNamed('/race', arguments: {'race': race});
+  }
+
+  void continueRace() {
+    Navigator.of(context).pushNamed('/race');
   }
 }

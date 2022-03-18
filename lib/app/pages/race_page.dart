@@ -19,8 +19,10 @@ class _RacePageState extends State<RacePage> {
   Widget build(BuildContext context) {
     final Map race = ModalRoute.of(context).settings.arguments;
 
-    RaceController.race.startedTime = race['race'].startedTime;
-    RaceController.race.laps = race['race'].laps;
+    if (race != null) {
+      RaceController.race.startedTime = race['race'].startedTime;
+      RaceController.race.laps = race['race'].laps;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -33,7 +35,7 @@ class _RacePageState extends State<RacePage> {
               height: 10,
             ),
             Text(
-                'Race Started at ${race['race'].startedTime.hour}:${race['race'].startedTime.minute}'),
+                'Race Started at ${RaceController.race.startedTime.hour}:${RaceController.race.startedTime.minute}'),
             SizedBox(
               height: 30,
             ),
