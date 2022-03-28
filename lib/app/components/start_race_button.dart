@@ -12,12 +12,16 @@ class StartRaceButton extends StatefulWidget {
 class _StartRaceButtonState extends State<StartRaceButton> {
   final TextEditingController numberOfLaps = TextEditingController();
   bool isButtonDisabled = true;
+  bool isContinueButtonDisabled = true;
 
   @override
   void initState() {
     numberOfLaps.addListener(() {
       checkIfButtonCanBeEnabled();
     });
+    isContinueButtonDisabled = (RaceController.race == null ||
+        RaceController.race.startedTime == null);
+
     super.initState();
   }
 
@@ -68,12 +72,16 @@ class _StartRaceButtonState extends State<StartRaceButton> {
               width: 10,
             ),
             ElevatedButton(
-                onPressed: () {
-                  continueRace();
-                },
+                onPressed: isContinueButtonDisabled
+                    ? null
+                    : () {
+                        continueRace();
+                      },
                 child: Text('Continue Race'),
                 style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).colorScheme.primary))
+                    primary: isContinueButtonDisabled
+                        ? Colors.grey
+                        : Theme.of(context).colorScheme.primary))
           ],
         )
       ],
@@ -99,6 +107,8 @@ class _StartRaceButtonState extends State<StartRaceButton> {
 
     RaceController.race.positions = [];
     RaceController.race.raceLogs = {};
+
+    isContinueButtonDisabled = false;
 
     Navigator.of(context).pushNamed('/race', arguments: {'race': race});
   }
