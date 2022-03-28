@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:race_app/app/components/race_log_list.dart';
 import 'package:race_app/app/components/racers_register.dart';
 import 'package:race_app/app/controllers/race_controller.dart';
+import 'package:race_app/app/controllers/storage_controller.dart';
 import 'package:race_app/app/dtos/race_dto.dart';
 
 class RacePage extends StatefulWidget {
@@ -13,7 +14,7 @@ class RacePage extends StatefulWidget {
 }
 
 class _RacePageState extends State<RacePage> {
-  static Race currentRace;
+  StorageController storageController = StorageController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,8 @@ class _RacePageState extends State<RacePage> {
       RaceController.race.startedTime = race['race'].startedTime;
       RaceController.race.laps = race['race'].laps;
     }
+
+    storageController.saveRace(race['race']);
 
     return Scaffold(
       appBar: AppBar(

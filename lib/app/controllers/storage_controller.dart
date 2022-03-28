@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:race_app/app/dtos/race_dto.dart';
 import 'package:race_app/app/dtos/racer_dto.dart';
 
 class StorageController {
@@ -15,6 +16,11 @@ class StorageController {
     return File('$path/racers.txt');
   }
 
+  Future<File> get raceFile async {
+    final path = await localPath;
+    return File('$path/race.txt');
+  }
+
   saveRacers(List<Racer> racers) async {
     final File file = await racersFile;
 
@@ -24,6 +30,17 @@ class StorageController {
     await file.writeAsString(jsonEncoded);
 
     await loadRacers();
+  }
+
+  saveRace(Race race) async{
+    final File file = await raceFile;
+
+    var raceJson = race.toJson();
+    var jsonEncoded = json.encode(raceJson);
+
+    await file.writeAsString(jsonEncoded);
+
+    await loadRace();
   }
 
   loadRacers() async {
@@ -41,5 +58,22 @@ class StorageController {
         listOfJson.map((racer) => Racer().fromJson(racer)).toList();
 
     return listOfRacers;
+  }
+
+  loadRace() async {
+    File file = await raceFile;
+    String sharedRace;
+
+    try{
+      sharedRace = await file.readAsString() ?? '[]';
+    }catch (e) {
+      sharedRace = '[]';
+    }
+
+    dynamic raceJson = json.decode(sharedRace);
+    var race =
+        raceJson.map((race) => Race().fromJson(race)).toList();
+
+    return race;
   }
 }

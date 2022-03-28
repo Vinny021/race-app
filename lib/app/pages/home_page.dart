@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:race_app/app/components/racer_input.dart';
 import 'package:race_app/app/components/racers_list.dart';
 import 'package:race_app/app/components/start_race_button.dart';
+import 'package:race_app/app/controllers/race_controller.dart';
 import 'package:race_app/app/controllers/racers_controller.dart';
 import 'package:race_app/app/dialogs/alert_dialog.dart';
 import 'package:race_app/app/streams/alert_dialog_stram_controller.dart';
@@ -27,6 +28,8 @@ class _HomePageState extends State<HomePage> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await racersController.loadRacers();
+      await RaceController.loadRace();
+      
     });
 
     alertDialogSubscription =

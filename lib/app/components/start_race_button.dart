@@ -103,7 +103,9 @@ class _StartRaceButtonState extends State<StartRaceButton> {
     Race race = Race(
         startedTime: DateTime.now(),
         laps: int.parse(laps),
-        racers: RacersController.racers);
+        racers: RacersController.racers,
+        positions: [],
+        raceLogs: {});
 
     RaceController.race.positions = [];
     RaceController.race.raceLogs = {};

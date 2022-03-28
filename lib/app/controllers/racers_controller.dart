@@ -34,9 +34,9 @@ class RacersController {
   }
 
   static deleteRacer(Racer racerToBeDeleted) {
-    StorageController sharedPreferencesController = StorageController();
+    StorageController storageController = StorageController();
     racers.removeWhere((racer) => racer.number == racerToBeDeleted.number);
-    sharedPreferencesController.saveRacers(racers);
+    storageController.saveRacers(racers);
     RefreshPageStreamController.refreshPageController.add(null);
   }
 
