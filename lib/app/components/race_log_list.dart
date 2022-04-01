@@ -18,43 +18,49 @@ class _RacerLogListState extends State<RacerLogList> {
             height: 100,
             color: Colors.green,
           ),
-          ElevatedButton(
-              onPressed: () {
-                setState(() {});
-              },
-              child: Text('Press')),
-          Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: RaceController.race.raceLogs.map((log) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        Text('${log.racer.number} - ${log.racer.name}'),
-                        Text('Lap: ${log.voltaTempo.volta}'),
-                        Text(
-                            'Time: ${log.voltaTempo.tempo.hour}:${log.voltaTempo.tempo.minute}:${log.voltaTempo.tempo.second}')
-                      ],
-                    )
-                  ],
-                );
-              }).toList()
-              // Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              //   Flexible(
-              //     child: ListTile(
-              //       contentPadding: EdgeInsets.only(left: 10, right: 10),
-              //       title: Text(racer.name),
-              //       subtitle: Text(racer.number.toString()),
-              //       onTap: () {
-              //         DeleteRacerStreamController.deleteRacerController
-              //             .add(racer);
-              //       },
-              //     ),
-              //   )
-              // ])
+          Container(
+            height: MediaQuery.of(context).size.height * 0.4,
+            child: ListView(
+              shrinkWrap: true,
+              physics: AlwaysScrollableScrollPhysics(),
+              children: [
+                Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: RaceController.race.raceLogs.map((log) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            child: Column(
+                              children: [
+                                Text('${log.racer.number} - ${log.racer.name}'),
+                                Text('Lap: ${log.voltaTempo.volta}'),
+                                Text(
+                                    'Time: ${log.voltaTempo.tempo.hour}:${log.voltaTempo.tempo.minute}:${log.voltaTempo.tempo.second}')
+                              ],
+                            ),
+                          )
+                        ],
+                      );
+                    }).toList()
+                    // Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                    //   Flexible(
+                    //     child: ListTile(
+                    //       contentPadding: EdgeInsets.only(left: 10, right: 10),
+                    //       title: Text(racer.name),
+                    //       subtitle: Text(racer.number.toString()),
+                    //       onTap: () {
+                    //         DeleteRacerStreamController.deleteRacerController
+                    //             .add(racer);
+                    //       },
+                    //     ),
+                    //   )
+                    // ])
 
-              ),
+                    ),
+              ],
+            ),
+          ),
         ],
       ),
     );

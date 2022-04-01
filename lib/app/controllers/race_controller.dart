@@ -53,7 +53,7 @@ class RaceController {
     });
     
     storageController.saveRace(race);
-
+    RefreshPageStreamController.refreshPageController.add(null);
     print(race.raceLogs);
   }
 }

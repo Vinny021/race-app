@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:race_app/app/components/race_log_list.dart';
 import 'package:race_app/app/components/racers_register.dart';
 import 'package:race_app/app/controllers/race_controller.dart';
 import 'package:race_app/app/controllers/storage_controller.dart';
 import 'package:race_app/app/dtos/race_dto.dart';
+import 'package:race_app/app/streams/refresh_page_stream.dart';
 
 class RacePage extends StatefulWidget {
   // Race race;
@@ -15,6 +18,17 @@ class RacePage extends StatefulWidget {
 
 class _RacePageState extends State<RacePage> {
   StorageController storageController = StorageController();
+  StreamSubscription refreshPageSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    refreshPageSubscription =
+        RefreshPageStreamController.refreshPageStream.listen((_) {
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
