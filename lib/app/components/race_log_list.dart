@@ -15,9 +15,34 @@ class _RacerLogListState extends State<RacerLogList> {
       child: Column(
         children: [
           Container(
-            height: 100,
-            color: Colors.green,
+            height: MediaQuery.of(context).size.height * 0.12,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.green.withOpacity(0.5),
+            child: ListView(
+              shrinkWrap: true,
+              physics: AlwaysScrollableScrollPhysics(),
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Positions'),
+                    for (var i = 0;
+                        i < RaceController.race.positions.length;
+                        i++)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                              '${i + 1}° Place ${RaceController.race.positions[i].name} - ${RaceController.race.positions[i].number}')
+                        ],
+                      )
+                  ],
+                ),
+              ],
+            ),
           ),
+          Divider(),
           Container(
             height: MediaQuery.of(context).size.height * 0.4,
             child: ListView(
