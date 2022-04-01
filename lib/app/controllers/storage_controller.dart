@@ -33,10 +33,12 @@ class StorageController {
   }
 
   saveRace(Race race) async{
+    List<Race> races = [race];
+    
     final File file = await raceFile;
 
-    var raceJson = race.toJson();
-    var jsonEncoded = json.encode(raceJson);
+    var listOfJson = races.map((race) => race.toJson()).toList();
+    var jsonEncoded = json.encode(listOfJson);
 
     await file.writeAsString(jsonEncoded);
 
@@ -70,8 +72,8 @@ class StorageController {
       sharedRace = '[]';
     }
 
-    dynamic raceJson = json.decode(sharedRace);
-    var race =
+    List<dynamic> raceJson = json.decode(sharedRace);
+    List<Race> race =
         raceJson.map((race) => Race().fromJson(race)).toList();
 
     return race;

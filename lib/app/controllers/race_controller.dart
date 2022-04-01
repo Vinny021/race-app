@@ -1,7 +1,9 @@
 import 'package:race_app/app/controllers/storage_controller.dart';
 import 'package:race_app/app/dtos/alert_dialog_props_dto.dart';
 import 'package:race_app/app/dtos/race_dto.dart';
+import 'package:race_app/app/dtos/race_log.dart';
 import 'package:race_app/app/dtos/racer_dto.dart';
+import 'package:race_app/app/dtos/voltaTempo_dto.dart';
 import 'package:race_app/app/streams/alert_dialog_stram_controller.dart';
 import 'package:race_app/app/streams/refresh_page_stream.dart';
 
@@ -34,8 +36,8 @@ class RaceController {
 
     print('Update');
 
-    race.raceLogs.forEach((key, value) {
-      if (value == racer) {
+    race.raceLogs.forEach((log) {
+      if (log.racer == racer) {
         print('Increment lap');
         actualLap++;
       }
@@ -47,7 +49,7 @@ class RaceController {
     }
 
     race.raceLogs.addAll({
-      {actualLap: timeCrossedLine} : racer
+      RaceLog(voltaTempo: VoltaTempo(tempo: timeCrossedLine, volta: actualLap), racer: racer)
     });
     
     storageController.saveRace(race);

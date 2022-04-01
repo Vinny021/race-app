@@ -25,16 +25,16 @@ class _RacerLogListState extends State<RacerLogList> {
               child: Text('Press')),
           Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: RaceController.race.raceLogs.entries.map((log) {
+              children: RaceController.race.raceLogs.map((log) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
                       children: [
-                        Text('${log.value.number} - ${log.value.name}'),
-                        Text('Lap: ${log.key.keys.first}'),
+                        Text('${log.racer.number} - ${log.racer.name}'),
+                        Text('Lap: ${log.voltaTempo.volta}'),
                         Text(
-                            'Time: ${log.key.values.first.hour}:${log.key.values.first.minute}:${log.key.values.first.second}')
+                            'Time: ${log.voltaTempo.tempo.hour}:${log.voltaTempo.tempo.minute}:${log.voltaTempo.tempo.second}')
                       ],
                     )
                   ],

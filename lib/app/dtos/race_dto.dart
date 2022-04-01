@@ -1,4 +1,5 @@
 import 'package:race_app/app/components/race_log_list.dart';
+import 'package:race_app/app/dtos/race_log.dart';
 import 'package:race_app/app/dtos/racer_dto.dart';
 
 class Race {
@@ -6,7 +7,7 @@ class Race {
   List<Racer> racers;
   int laps;
   List<Racer> positions = [];
-  Map<Map<int, DateTime>, Racer> raceLogs = {};
+  List<RaceLog> raceLogs = [];
 
   Race(
       {this.startedTime,
@@ -25,13 +26,17 @@ class Race {
       'positions': this.positions.map((racer) {
         return racer.toJson();
       }).toList(),
-      'raceLogs': this.raceLogs
+      'raceLogs': this.raceLogs.map((log) {
+        return log.toJson();
+      }).toList()
     };
   }
 
   Race fromJson(Map<String, dynamic> json) {
-    List<Map<String, dynamic>> racers = json['racers'];
-    List<Map<String, dynamic>> positions = json['positions'];
+    List<dynamic> racers = json['racers'];
+    List<dynamic> positions = json['positions'];
+    List<dynamic> raceLogs = json['raceLogs'];
+
     return Race(
         startedTime: DateTime.parse(json['startedTime']),
         racers: racers.map((racer) {
@@ -41,6 +46,9 @@ class Race {
         positions: positions.map((racer) {
           return Racer().fromJson(racer);
         }).toList(),
-        raceLogs: json['raceLogs']);
+        raceLogs: raceLogs.map((log) {
+          return RaceLog().fromJson(log);
+        }).toList()
+        );
   }
 }

@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:race_app/app/controllers/race_controller.dart';
 import 'package:race_app/app/controllers/racers_controller.dart';
 import 'package:race_app/app/dtos/race_dto.dart';
+import 'package:race_app/app/streams/refresh_page_stream.dart';
 
 class StartRaceButton extends StatefulWidget {
   @override
@@ -11,6 +14,7 @@ class StartRaceButton extends StatefulWidget {
 
 class _StartRaceButtonState extends State<StartRaceButton> {
   final TextEditingController numberOfLaps = TextEditingController();
+  StreamSubscription refreshPageSubscription;
   bool isButtonDisabled = true;
   bool isContinueButtonDisabled = true;
 
@@ -21,6 +25,14 @@ class _StartRaceButtonState extends State<StartRaceButton> {
     });
     isContinueButtonDisabled = (RaceController.race == null ||
         RaceController.race.startedTime == null);
+
+    refreshPageSubscription =
+        RefreshPageStreamController.refreshPageStream.listen((_) {
+      setState(() {
+        isContinueButtonDisabled = (RaceController.race == null ||
+            RaceController.race.startedTime == null);
+      });
+    });
 
     super.initState();
   }
@@ -105,10 +117,10 @@ class _StartRaceButtonState extends State<StartRaceButton> {
         laps: int.parse(laps),
         racers: RacersController.racers,
         positions: [],
-        raceLogs: {});
+        raceLogs: []);
 
     RaceController.race.positions = [];
-    RaceController.race.raceLogs = {};
+    RaceController.race.raceLogs = [];
 
     isContinueButtonDisabled = false;
 
@@ -116,6 +128,7 @@ class _StartRaceButtonState extends State<StartRaceButton> {
   }
 
   void continueRace() {
-    Navigator.of(context).pushNamed('/race');
+    Race race = RaceController.race;
+    Navigator.of(context).pushNamed('/race', arguments: {'race': race});
   }
 }
