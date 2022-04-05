@@ -119,6 +119,7 @@ class _StartRaceButtonState extends State<StartRaceButton> {
         positions: [],
         raceLogs: []);
 
+    RaceController.race.racers = RacersController.racers;
     RaceController.race.positions = [];
     RaceController.race.raceLogs = [];
 

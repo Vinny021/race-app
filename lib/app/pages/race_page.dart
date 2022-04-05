@@ -26,7 +26,7 @@ class _RacePageState extends State<RacePage> {
 
     refreshPageSubscription =
         RefreshPageStreamController.refreshPageStream.listen((_) {
-      setState(() {});
+      if (mounted) setState(() {});
     });
   }
 

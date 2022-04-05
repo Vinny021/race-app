@@ -26,7 +26,14 @@ class RaceController {
     DateTime timeCrossedLine = DateTime.now();
     int actualLap = 1;
 
-    if (race.positions.contains(racer)) {
+    bool racerFinished = false; 
+
+    race.positions.forEach((element) {
+      if(element.number == racer.number)
+        racerFinished = true;
+    });
+
+    if (racerFinished) {
       print('Show Alert');
       AlertDialogStreamController.alertDialogController.add(AlertDialogProps(
           error: "Racer Already Finished",
